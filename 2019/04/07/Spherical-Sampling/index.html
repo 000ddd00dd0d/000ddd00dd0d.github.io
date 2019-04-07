@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="本文探索了几种在球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 #轴向均匀（Uniform Axis）最容易想到的">
+  <meta name="description" content="&amp;emsp;&amp;emsp;本文探索了几种在三维球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 轴向均匀（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。$ \frac{ x }{ y } $">
 <meta name="keywords" content="sampling,采样">
 <meta property="og:type" content="article">
 <meta property="og:title" content="球面采样 Spherical Sampling">
 <meta property="og:url" content="http://yoursite.com/2019/04/07/Spherical-Sampling/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
-<meta property="og:description" content="本文探索了几种在球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 #轴向均匀（Uniform Axis）最容易想到的">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本文探索了几种在三维球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 轴向均匀（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。$ \frac{ x }{ y } $">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-07T14:02:04.013Z">
+<meta property="og:updated_time" content="2019-04-07T14:11:51.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="球面采样 Spherical Sampling">
-<meta name="twitter:description" content="本文探索了几种在球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 #轴向均匀（Uniform Axis）最容易想到的">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文探索了几种在三维球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。 轴向均匀（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。$ \frac{ x }{ y } $">
 
 
 
@@ -367,7 +367,7 @@
                 
               
 
-              <time title="Created: 2019-04-07 21:03:28 / Modified: 22:02:04" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
+              <time title="Created: 2019-04-07 21:03:28 / Modified: 22:11:51" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
             
 
             
@@ -424,8 +424,8 @@
       
 
       
-        <p>本文探索了几种在球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。</p>
-<p>#轴向均匀（Uniform Axis）<br>最容易想到的</p>
+        <p>&emsp;&emsp;本文探索了几种在三维球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。</p>
+<h1 id="轴向均匀（Uniform-Axis）"><a href="#轴向均匀（Uniform-Axis）" class="headerlink" title="轴向均匀（Uniform Axis）"></a>轴向均匀（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。$ \frac{ x }{ y } $</p>
 
       
     </div>
@@ -516,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -601,6 +610,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#轴向均匀（Uniform-Axis）"><span class="nav-number">1.</span> <span class="nav-text">轴向均匀（Uniform Axis）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -771,6 +797,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 
