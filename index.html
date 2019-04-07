@@ -525,7 +525,7 @@
                 
               
 
-              <time title="Created: 2019-04-07 21:03:28 / Modified: 22:11:51" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
+              <time title="Created: 2019-04-07 21:03:28 / Modified: 22:29:40" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
             
 
             
@@ -585,7 +585,8 @@
         
           
             <p>&emsp;&emsp;本文探索了几种在三维球面上采样的方式，主要关注如何高效快速地在球面进行均匀采样。</p>
-<h1 id="轴向均匀（Uniform-Axis）"><a href="#轴向均匀（Uniform-Axis）" class="headerlink" title="轴向均匀（Uniform Axis）"></a>轴向均匀（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。$ \frac{ x }{ y } $</p>
+<h1 id="轴向均匀（Uniform-Axis）"><a href="#轴向均匀（Uniform-Axis）" class="headerlink" title="轴向均匀（Uniform Axis）"></a>轴向均匀（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">    x = uniform(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    y = uniform(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    z = uniform(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z))</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;然而该方法最大的问题是其在球面上的采样并不均匀，由于该方式实际上是将立方体中均匀分布的点映射到球面上，因此在立方体角点处会采样到更多的点，如下图所示：</p>
 
           
         
@@ -910,9 +911,51 @@
       
     
       
+        
+      
     
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
