@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/uniform_axis.png">
 <meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/normal_axis.png">
-<meta property="og:updated_time" content="2019-04-07T16:12:43.689Z">
+<meta property="og:updated_time" content="2019-04-07T16:13:57.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="球面采样 Spherical Sampling">
 <meta name="twitter:description" content="1. 轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1, 1);    y = uniform(-1, 1);    z =">
@@ -387,7 +387,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-08 00:12:43" itemprop="dateModified" datetime="2019-04-08T00:12:43+08:00">2019-04-08</time>
+                <time title="Modified: 2019-04-08 00:13:57" itemprop="dateModified" datetime="2019-04-08T00:13:57+08:00">2019-04-08</time>
               
             
           </span>
@@ -453,7 +453,7 @@
 &emsp;&emsp;而根据我们的目标，我们希望将$S$上的积分变换到$D$上，于是希望：
 <center>$1=\iint_{S}f(t)dS=\iint_{uv}f(u,v)dudv$</center>
 &emsp;&emsp;更准确而言：
-<center>$f(t)dS=f(u,v)dudv</center>
+<center>$f(t)dS=f(u,v)dudv$</center>
 &emsp;&emsp;现在即需要对此进行证明，由于$u,v$在$D$上进行均匀采样，因此有$f(u,v)=\frac{1}{\pi}$。然后对$dS$进行变换：
 <center>$dS=\sqrt{1+(\frac{\partial{z}}{\partial{x}})^2+(\frac{\partial{z}}{\partial{y}})^2}dxdy=\frac{1}{z}dxdy$</center>
 <center>$dxdy=det(J)dudv=\left|\begin{array}{cccc}
