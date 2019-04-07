@@ -525,7 +525,7 @@
                 
               
 
-              <time title="Created: 2019-04-07 21:03:28 / Modified: 23:12:36" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
+              <time title="Created: 2019-04-07 21:03:28 / Modified: 23:41:05" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
             
 
             
@@ -588,6 +588,11 @@
 <p>&emsp;&emsp;然而该方法最大的问题是其在球面上的采样并不均匀，由于该方式实际上是将立方体中均匀分布的点映射到球面上，因此在立方体角点处会采样到更多的点，如下图所示：<br><img src="/pictures/spherical_sampling/uniform_axis.png" alt="uniform-axis"></p>
 <h1 id="2-轴向正态采样-（Normal-Axis）"><a href="#2-轴向正态采样-（Normal-Axis）" class="headerlink" title="2. 轴向正态采样 （Normal Axis）"></a>2. 轴向正态采样 （Normal Axis）</h1><p>&emsp;&emsp;该方法与第一种方法类似，但不是均匀采样，而是在每个轴上独立进行正态采样，然后同样地映射到半球面上即可。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    y = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    z = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z))</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;从下图可以看出，该正态采样方式是球形t对称（spherical symmetric）的，其在球面上的映射也是均匀的。<br><img src="/pictures/spherical_sampling/normal_axis.png" alt="normal-axis"></p>
+<h1 id="3-Marsaglia采样"><a href="#3-Marsaglia采样" class="headerlink" title="3. Marsaglia采样"></a>3. Marsaglia采样</h1><p>&emsp;&emsp;该方法是一种基于变换的抽样方法，相较于方法1该方法保证了球面采样的均匀性，而与方法2比较该方法更快速。根据维基百科所述，Marsaglia算法可以以较快的速度一次性生成一对相互独立的符合标准正态分布的采样。但如下的方法，本人才疏学浅，并未发现其与正态分布的联系，仅对变换的均匀性做了简单证明。<br>&emsp;&emsp;伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    u = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    v = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    r2 = u^<span class="number">2</span> + v^<span class="number">2</span>;</span><br><span class="line">&#125;<span class="keyword">while</span>(r2 &gt; <span class="number">1</span>);</span><br><span class="line">x = <span class="number">2</span> * u * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">y = <span class="number">2</span> * v * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">z = <span class="number">1</span> - <span class="number">2</span> * r2;</span><br><span class="line"><span class="keyword">return</span> (x, y, z);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;简单来说，该方法希望找到一个从圆盘$D$到球面$S$的均匀映射。因此首先在圆盘上通过rejective sampling方式进行均匀采样的到坐标$(u, v)$，然后魔幻现实主义地给出了如下映射：</p>
+<center>$x=2u\sqrt{(1-r^2)}$</center>
+<center>$y=2v\sqrt{(1-r^2)}$</center>
+<center>$z=1-2r^2$</center>
 
           
         
