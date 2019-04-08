@@ -320,177 +320,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="000ddd00dd0d">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="000ddd00dd0d">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/07/test/" class="post-title-link" itemprop="url">test</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-07 21:32:58 / Modified: 21:41:45" itemprop="dateCreated datePublished" datetime="2019-04-07T21:32:58+08:00">2019-04-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/Categories/Computer-Vision/" itemprop="url" rel="index"><span itemprop="name">Computer Vision</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/07/test/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/Spherical-Sampling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -553,7 +382,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-08 21:52:41" itemprop="dateModified" datetime="2019-04-08T21:52:41+08:00">2019-04-08</time>
+                <time title="Modified: 2019-04-08 22:53:34" itemprop="dateModified" datetime="2019-04-08T22:53:34+08:00">2019-04-08</time>
               
             
           </span>
@@ -606,11 +435,8 @@
 
       
         
-          
-            <p>
-              轴向均匀采样（Uniform Axis）&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：do&#123;    x = unifor
-              ...
-            </p>
+          <p>&emsp;&emsp;本文探索了几种不同的在球面或半球面上采样的方法。</p>
+<h1 id="轴向均匀采样（Uniform-Axis）"><a href="#轴向均匀采样（Uniform-Axis）" class="headerlink" title="轴向均匀采样（Uniform Axis）"></a>轴向均匀采样（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    y = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    z = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z));</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -701,7 +527,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -722,7 +548,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -938,8 +764,6 @@
 
   
   
-    
-      
     
       
         

@@ -96,21 +96,23 @@
 
 
 
-  <meta name="description" content="轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1, 1);    y = uniform(-1, 1);    z = uni">
+  <meta name="description" content="&amp;emsp;&amp;emsp;本文探索了几种不同的在球面或半球面上采样的方法。 轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1,">
 <meta name="keywords" content="sampling,采样">
 <meta property="og:type" content="article">
 <meta property="og:title" content="球面采样 Spherical Sampling">
 <meta property="og:url" content="http://yoursite.com/2019/04/07/Spherical-Sampling/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
-<meta property="og:description" content="轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1, 1);    y = uniform(-1, 1);    z = uni">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本文探索了几种不同的在球面或半球面上采样的方法。 轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1,">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/uniform_axis.png">
 <meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/normal_axis.png">
 <meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/marsaglia.png">
-<meta property="og:updated_time" content="2019-04-08T13:52:41.228Z">
+<meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/hemi.png">
+<meta property="og:image" content="http://yoursite.com/pictures/spherical_sampling/cosine.png">
+<meta property="og:updated_time" content="2019-04-08T14:53:34.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="球面采样 Spherical Sampling">
-<meta name="twitter:description" content="轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1, 1);    y = uniform(-1, 1);    z = uni">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文探索了几种不同的在球面或半球面上采样的方法。 轴向均匀采样（Uniform Axis）&amp;emsp;&amp;emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：1234567do&amp;#123;    x = uniform(-1,">
 <meta name="twitter:image" content="http://yoursite.com/pictures/spherical_sampling/uniform_axis.png">
 
 
@@ -388,7 +390,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-08 21:52:41" itemprop="dateModified" datetime="2019-04-08T21:52:41+08:00">2019-04-08</time>
+                <time title="Modified: 2019-04-08 22:53:34" itemprop="dateModified" datetime="2019-04-08T22:53:34+08:00">2019-04-08</time>
               
             
           </span>
@@ -440,12 +442,13 @@
       
 
       
-        <h1 id="轴向均匀采样（Uniform-Axis）"><a href="#轴向均匀采样（Uniform-Axis）" class="headerlink" title="轴向均匀采样（Uniform Axis）"></a>轴向均匀采样（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    y = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    z = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z));</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;然而该方法最大的问题是其在球面上的采样并不均匀，由于该方式实际上是将立方体中均匀分布的点映射到球面上，因此在立方体角点处会采样到更多的点，如下图所示：<br><img src="/pictures/spherical_sampling/uniform_axis.png" alt="uniform-axis"></p>
+        <p>&emsp;&emsp;本文探索了几种不同的在球面或半球面上采样的方法。</p>
+<h1 id="轴向均匀采样（Uniform-Axis）"><a href="#轴向均匀采样（Uniform-Axis）" class="headerlink" title="轴向均匀采样（Uniform Axis）"></a>轴向均匀采样（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    y = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    z = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z));</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a> 
+<p>&emsp;&emsp;然而该方法最大的问题是其在球面上的采样<strong>非均匀</strong>，由于该方式实际上是将立方体中均匀分布的点映射到球面上，因此在立方体角点处会采样到更多的点，如下图所示：<br><img src="/pictures/spherical_sampling/uniform_axis.png" alt="uniform-axis"></p>
 <h1 id="轴向正态采样-（Normal-Axis）"><a href="#轴向正态采样-（Normal-Axis）" class="headerlink" title="轴向正态采样 （Normal Axis）"></a>轴向正态采样 （Normal Axis）</h1><p>&emsp;&emsp;该方法与第一种方法类似，但不是均匀采样，而是在每个轴上独立进行正态采样，然后同样地映射到半球面上即可。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    y = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">    z = normal(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z))</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;从下图可以看出，该正态采样方式是球形t对称（spherical symmetric）的，其在球面上的映射也是均匀的。<br><img src="/pictures/spherical_sampling/normal_axis.png" alt="normal-axis"></p>
-<h1 id="Marsaglia采样"><a href="#Marsaglia采样" class="headerlink" title="Marsaglia采样"></a>Marsaglia采样</h1><p>&emsp;&emsp;该方法是一种基于变换的抽样方法，相较于方法1该方法保证了球面采样的均匀性，而与方法2比较该方法更快速，如下图所示：<br><img src="/pictures/spherical_sampling/marsaglia.png" alt="marsaglia"></p>
-<p>&emsp;&emsp;根据维基百科所述，Marsaglia算法可以以较快的速度一次性生成一对相互独立的符合标准正态分布的采样。但如下的方法，本人才疏学浅，并未发现其与正态分布的联系，仅对变换的均匀性做了简单证明。<br>&emsp;&emsp;伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    u = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    v = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    r2 = u^<span class="number">2</span> + v^<span class="number">2</span>;</span><br><span class="line">&#125;<span class="keyword">while</span>(r2 &gt; <span class="number">1</span>);</span><br><span class="line">x = <span class="number">2</span> * u * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">y = <span class="number">2</span> * v * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">z = <span class="number">1</span> - <span class="number">2</span> * r2;</span><br><span class="line"><span class="keyword">return</span> (x, y, z);</span><br></pre></td></tr></table></figure></p>
+<h1 id="Marsaglia采样"><a href="#Marsaglia采样" class="headerlink" title="Marsaglia采样"></a>Marsaglia采样</h1><p>&emsp;&emsp;该方法是一种基于变换的抽样方法，相较于方法1该方法保证了球面采样的均匀性，而与方法2比较该方法更快速，如下图所示：<br><img src="/pictures/spherical_sampling/marsaglia.png" alt="marsaglia"><br>&emsp;&emsp;根据维基百科所述，Marsaglia算法可以以较快的速度一次性生成一对相互独立的符合标准正态分布的采样。但如下的方法，本人才疏学浅，并未发现其与正态分布的联系，仅对变换的均匀性做了简单证明。<br>&emsp;&emsp;伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    u = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    v = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    r2 = u^<span class="number">2</span> + v^<span class="number">2</span>;</span><br><span class="line">&#125;<span class="keyword">while</span>(r2 &gt; <span class="number">1</span>);</span><br><span class="line">x = <span class="number">2</span> * u * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">y = <span class="number">2</span> * v * <span class="built_in">sqrt</span>(<span class="number">1</span> - r2);</span><br><span class="line">z = <span class="number">1</span> - <span class="number">2</span> * r2;</span><br><span class="line"><span class="keyword">return</span> (x, y, z);</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;简单来说，该方法希望找到一个从圆盘$D$到球面$S$的均匀映射。因此首先在圆盘上通过rejective sampling方式进行均匀采样的到坐标$(u, v)$，然后魔幻现实主义地给出了如下映射：</p>
 <center>$x=2u\sqrt{(1-r^2)}$</center>
 <center>$y=2v\sqrt{(1-r^2)}$</center>
@@ -464,7 +467,57 @@
 &emsp;&emsp;即可得到$dS=4dudv$，综上即有：
 <center>$f(t)dS=\frac{1}{4\pi}*4dudv=f(u,v)dudv$</center>
 
-<h1 id="半球面采样"><a href="#半球面采样" class="headerlink" title="半球面采样"></a>半球面采样</h1><p>&emsp;&emsp;</p>
+<h1 id="半球面采样"><a href="#半球面采样" class="headerlink" title="半球面采样"></a>半球面采样</h1><p>&emsp;&emsp;如果仅需要对半球面进行均匀采样，那么可以采用如下的变换方式：</p>
+<p><center>$z=rand(),\phi=rand()$</center></p>
+<p><center>$r=\sqrt{1-z^2}$</center></p>
+<p><center>$\Phi=2\pi\phi$</center></p>
+<p><center>$x=rcos\Phi, y=rsin\Phi$</center><br>&emsp;&emsp;同样地可以该出类似的证明:</p>
+<p><center>$f(z,\phi)=1$</center></p>
+<p><center>$dS=\frac{1}{z}dxdy$</center></p>
+<p><center>$det(J)=\left|\begin{array}{cccc}
+\frac{\partial{x}}{\partial{u}} & \frac{\partial{x}}{\partial{v}} \\
+\frac{\partial{y}}{\partial{u}} & \frac{\partial{y}}{\partial{v}} \end{array}\right| = 4\pi z$</center></p>
+<p><center>$f(t)dS=f(t,\phi)dzd\phi$</center><br>&emsp;&emsp;基于该变换我们可以得到如下的半球面均匀采样：<br><img src="/pictures/spherical_sampling/hemi.png" alt="hemi"></p>
+<h1 id="Cos采样-（Cosine-Weight-Sampling）"><a href="#Cos采样-（Cosine-Weight-Sampling）" class="headerlink" title="Cos采样 （Cosine Weight Sampling）"></a>Cos采样 （Cosine Weight Sampling）</h1><p>&emsp;&emsp;该方法生成的点云坐标距离圆盘$D$中心越近，其密度越高。其采样方式与半球面均匀采样有细微差别：</p>
+<p><center>$z=\sqrt{rand()},\phi=rand()$</center></p>
+<p><center>$r=\sqrt{1-z^2}$</center></p>
+<p><center>$\Phi=2\pi\phi$</center></p>
+<p><center>$x=rcos\Phi, y=rsin\Phi$</center><br>&emsp;&emsp;生成的点云如下：<br><img src="/pictures/spherical_sampling/cosine.png" alt="cosine"></p>
+<h1 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h1><p>&emsp;&emsp;这里我比较了上述3种均匀采样的采样速度，其中实现语言使用的C++，随机数生使用的是标准库的的随机数生成器，得到了如下的结果：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>采样数</th>
+<th>1e4</th>
+<th>1e5</th>
+<th>1e6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Marsaglia</td>
+<td>0.001s</td>
+<td>0.011s</td>
+<td>0.116s</td>
+</tr>
+<tr>
+<td>Normal-Axis</td>
+<td>0.001s</td>
+<td>0.029s</td>
+<td>0.282s</td>
+</tr>
+<tr>
+<td>Hemi</td>
+<td>0.001s</td>
+<td>0.008s</td>
+<td>0.078s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;就上述结果来看，全球面采样上，Marsaglia比正态轴向采样更快，虽然是基于rejective的方法。而半球面上的采样则比这两种方法都快速。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://corysimon.github.io/articles/uniformdistn-on-sphere/" target="_blank" rel="noopener">http://corysimon.github.io/articles/uniformdistn-on-sphere/</a><br><a href="https://www.cnblogs.com/cofludy/p/5894270.html" target="_blank" rel="noopener">https://www.cnblogs.com/cofludy/p/5894270.html</a></p>
 
       
     </div>
@@ -499,22 +552,6 @@
       
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/07/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
@@ -580,7 +617,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -601,7 +638,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -660,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#轴向均匀采样（Uniform-Axis）"><span class="nav-number">1.</span> <span class="nav-text">轴向均匀采样（Uniform Axis）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#轴向正态采样-（Normal-Axis）"><span class="nav-number">2.</span> <span class="nav-text">轴向正态采样 （Normal Axis）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Marsaglia采样"><span class="nav-number">3.</span> <span class="nav-text">Marsaglia采样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#半球面采样"><span class="nav-number">4.</span> <span class="nav-text">半球面采样</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#轴向均匀采样（Uniform-Axis）"><span class="nav-number">1.</span> <span class="nav-text">轴向均匀采样（Uniform Axis）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#轴向正态采样-（Normal-Axis）"><span class="nav-number">2.</span> <span class="nav-text">轴向正态采样 （Normal Axis）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Marsaglia采样"><span class="nav-number">3.</span> <span class="nav-text">Marsaglia采样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#半球面采样"><span class="nav-number">4.</span> <span class="nav-text">半球面采样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cos采样-（Cosine-Weight-Sampling）"><span class="nav-number">5.</span> <span class="nav-text">Cos采样 （Cosine Weight Sampling）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较"><span class="nav-number">6.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
