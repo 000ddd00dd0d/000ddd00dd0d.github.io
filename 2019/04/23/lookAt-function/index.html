@@ -96,13 +96,21 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="000ddd00dd0d">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="&amp;emsp;&amp;emsp;在OpenGL中我们可以借助gluLookAt()或glm::lookAt()函数设置或者获取相应的视角转换矩阵，从而将片元从世界坐标系转换到相机坐标系。接下来我们以glm::lookAt()为例讲述这一过程具体是如何实现的。首先我们可以看一下glm::lookAt()的函数声明：123456template&amp;lt;typename T, qualifier Q&amp;gt;GL">
+<meta name="keywords" content="OpenGL,Matrix Transform,functions,矩阵变换,函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lookAt() 函数">
+<meta property="og:url" content="http://yoursite.com/2019/04/23/lookAt-function/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;在OpenGL中我们可以借助gluLookAt()或glm::lookAt()函数设置或者获取相应的视角转换矩阵，从而将片元从世界坐标系转换到相机坐标系。接下来我们以glm::lookAt()为例讲述这一过程具体是如何实现的。首先我们可以看一下glm::lookAt()的函数声明：123456template&amp;lt;typename T, qualifier Q&amp;gt;GL">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/pictures/lookAt/axis.png">
+<meta property="og:image" content="http://yoursite.com/pictures/lookAt/world.png">
+<meta property="og:updated_time" content="2019-04-23T11:30:41.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="000ddd00dd0d">
+<meta name="twitter:title" content="lookAt() 函数">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;在OpenGL中我们可以借助gluLookAt()或glm::lookAt()函数设置或者获取相应的视角转换矩阵，从而将片元从世界坐标系转换到相机坐标系。接下来我们以glm::lookAt()为例讲述这一过程具体是如何实现的。首先我们可以看一下glm::lookAt()的函数声明：123456template&amp;lt;typename T, qualifier Q&amp;gt;GL">
+<meta name="twitter:image" content="http://yoursite.com/pictures/lookAt/axis.png">
 
 
 
@@ -110,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/23/lookAt-function/">
 
 
 
@@ -120,7 +128,7 @@
   };
 </script>
 
-  <title>000ddd00dd0d</title>
+  <title>lookAt() 函数 | 000ddd00dd0d</title>
   
 
 
@@ -168,8 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -207,7 +214,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -303,9 +310,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -337,10 +344,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/23/lookAt-function/" class="post-title-link" itemprop="url">lookAt() 函数</a>
+          <h1 class="post-title" itemprop="name headline">lookAt() 函数
+
               
             
           </h1>
@@ -422,18 +427,38 @@
       
 
       
-        
-          <p>&emsp;&emsp;在OpenGL中我们可以借助gluLookAt()或glm::lookAt()函数设置或者获取相应的视角转换矩阵，从而将片元从世界坐标系转换到相机坐标系。接下来我们以glm::lookAt()为例讲述这一过程具体是如何实现的。首先我们可以看一下glm::lookAt()的函数声明：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, qualifier Q&gt;</span><br><span class="line">GLM_FUNC_QUALIFIER mat&lt;<span class="number">4</span>, <span class="number">4</span>, T, Q&gt; lookAt(</span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span> &amp;eye, </span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span>&amp; center, </span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span>&amp; up</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/23/lookAt-function/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+        <p>&emsp;&emsp;在OpenGL中我们可以借助gluLookAt()或glm::lookAt()函数设置或者获取相应的视角转换矩阵，从而将片元从世界坐标系转换到相机坐标系。接下来我们以glm::lookAt()为例讲述这一过程具体是如何实现的。首先我们可以看一下glm::lookAt()的函数声明：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, qualifier Q&gt;</span><br><span class="line">GLM_FUNC_QUALIFIER mat&lt;<span class="number">4</span>, <span class="number">4</span>, T, Q&gt; lookAt(</span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span> &amp;eye, </span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span>&amp; center, </span><br><span class="line">    vec&lt;<span class="number">3</span>, T, Q&gt; <span class="keyword">const</span>&amp; up</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a> 
+<p>&emsp;&emsp;容易看出这是一个函数模板，接受三个三维向量，分别代表相机的<strong>位置eye</strong>、<strong>观察点center</strong>、<strong>朝上的方向up</strong>，并返回一个<strong>视角转换矩阵</strong>。在讲述原理前，我们先说明一下OpenGL中通常使用的坐标系。<br>&emsp;&emsp;如下图所示，在OpenGL中，我们通常使用右手坐标系 $\textbf{O}xyz$ ，即$\textbf{z}=\textbf{x}\times \textbf{y}$，并且希望经过视角变换后相机看向$-\textbf{z}$方向，并且相机朝上方向为$\textbf{y}$，即下图所示的$\textbf{O}ruv$:<br><img src="/pictures/lookAt/axis.png" alt="axis"></p>
+<p>&emsp;&emsp;接下来即可考虑如何根据三个输入参数eye、center、up获取上述转换矩阵。<br><img src="/pictures/lookAt/world.png" alt="world"><br>&emsp;&emsp;在上面的场景中，我们先根据三个输入参数计算世界坐标系下的三个相互正交的轴<strong>（需要说明的是输入参数up未必与视线垂直，因此需要校准）</strong>：</p>
+<center>$\textbf{v} = normalize(\textbf{center} - \textbf{eye}) \\
+\textbf{r} = normalize(\textbf{up} )\times \textbf{v} \\
+\textbf{u} = \textbf{v}\times \textbf{r}$</center>
+&emsp;&emsp;然后即是将eye平移到坐标系原点，令$\textbf{t}=-\textbf{eye}$，则有平移矩阵：
+<center>$\textbf{R}=\left[\begin{array}{cccc}
+1 & 0 & 0 & t_x \\
+0 & 1 & 0 & t_y \\
+0 & 0 & 1 & t_z \\
+0 & 0 & 0 & 1\end{array}\right]$
+</center>
+&emsp;&emsp;继续将三个轴变换到相应的位置即可，看到如下每一行分别与$\textbf{r}$点积j的结果刚好为$[-1,0,0]$，达到了我们希望将该坐标系变换到上述的位置。（前提是三个轴两两正交）
+<center>$\textbf{R}=\left[\begin{array}{cccc}
+-r_x & -r_y & -r_z & 0 \\
+u_x & u_y & u_z & 0 \\
+-v_x & -v_y & -v_z & 0 \\
+0 & 0 & 0 & 1\end{array}\right]$
+</center>
+
+<p>&emsp;&emsp;综上，转换矩阵为：</p>
+<center>$\textbf{M}=\textbf{RT} = \left[\begin{array}{cccc}
+-r_x & -r_y & -r_z & -\textbf{r}\cdot\textbf{t} \\
+u_x & u_y & u_z & \textbf{u}\cdot\textbf{t} \\
+-v_x & -v_y & -v_z & -\textbf{v}\cdot\textbf{t} \\
+0 & 0 & 0 & 1\end{array}\right]$
+</center>
+
+<p>&emsp;&emsp;可以通过如下代码进行验证（此处默认右手系，在GLM中可以自主选择左右手系：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glm/glm.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glm/gtc/matrix_transform.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    glm::<span class="function">vec3 <span class="title">eye</span><span class="params">(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    glm::<span class="function">vec3 <span class="title">up</span><span class="params">(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    glm::<span class="function">vec3 <span class="title">center</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    glm::mat4x4 lookat = glm::lookAt(eye, center, up);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; lookat[j][i] &lt;&lt; <span class="string">'\t'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    glm::vec3 v = glm::normalize(center - eye);</span><br><span class="line">    glm::vec3 r = glm::normalize(glm::cross(up, v));</span><br><span class="line">    glm::vec3 u = glm::normalize(glm::cross(v, r));</span><br><span class="line"></span><br><span class="line">    glm::vec3 t = -eye;</span><br><span class="line">    t = glm::vec3(glm::dot(-r, t), glm::dot(u, t), glm::dot(-v, t));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; -r[<span class="number">0</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; -r[<span class="number">1</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; -r[<span class="number">2</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; t[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; u[<span class="number">0</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; u[<span class="number">1</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; u[<span class="number">2</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; t[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; -v[<span class="number">0</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; -v[<span class="number">1</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; -v[<span class="number">2</span>] &lt;&lt; <span class="string">'\t'</span> &lt;&lt; t[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; <span class="string">'\t'</span> &lt;&lt; <span class="number">0</span> &lt;&lt; <span class="string">'\t'</span> &lt;&lt; <span class="number">0</span> &lt;&lt; <span class="string">'\t'</span> &lt;&lt; <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -454,373 +479,44 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="000ddd00dd0d">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="000ddd00dd0d">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/09/Monte-Carlo-Integration/" class="post-title-link" itemprop="url">蒙特卡洛积分 Monte Carlo Integration</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-09 22:56:32" itemprop="dateCreated datePublished" datetime="2019-04-09T22:56:32+08:00">2019-04-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-23 17:21:26" itemprop="dateModified" datetime="2019-04-23T17:21:26+08:00">2019-04-23</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/Categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/Tags/OpenGL/" rel="tag"># OpenGL</a>
           
-
+            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
           
-            
-            
+            <a href="/Tags/functions/" rel="tag"># functions</a>
           
-
+            <a href="/Tags/矩阵变换/" rel="tag"># 矩阵变换</a>
           
+            <a href="/Tags/函数/" rel="tag"># 函数</a>
           
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>&emsp;&emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法，我暂时还未得到证明。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/09/Monte-Carlo-Integration/#more" rel="contents">
-                Read more &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/09/Monte-Carlo-Integration/" rel="next" title="蒙特卡洛积分 Monte Carlo Integration">
+                <i class="fa fa-chevron-left"></i> 蒙特卡洛积分 Monte Carlo Integration
               </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/Spherical-Sampling/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="000ddd00dd0d">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="000ddd00dd0d">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/07/Spherical-Sampling/" class="post-title-link" itemprop="url">球面采样 Spherical Sampling</a>
-              
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-07 21:03:28" itemprop="dateCreated datePublished" datetime="2019-04-07T21:03:28+08:00">2019-04-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-08 23:46:31" itemprop="dateModified" datetime="2019-04-08T23:46:31+08:00">2019-04-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/Categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>&emsp;&emsp;本文探索了几种不同的在球面或半球面上采样的方法。</p>
-<h1 id="轴向均匀采样（Uniform-Axis）"><a href="#轴向均匀采样（Uniform-Axis）" class="headerlink" title="轴向均匀采样（Uniform Axis）"></a>轴向均匀采样（Uniform Axis）</h1><p>&emsp;&emsp;最容易想到的采样方式即在三个互相垂直的坐标轴$x$,$y$,$z$上单独进行均匀采样，最后将采样到的坐标值正则化即可，不过需要注意的是该采样方式可能取到$(0,0,0)$这个坐标。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    y = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">    z = uniform(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span>((x,y,z) == (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line"><span class="keyword">return</span> normalize((x,y,z));</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/07/Spherical-Sampling/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -830,14 +526,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1095,6 +792,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
 
   
 
@@ -1111,6 +812,8 @@
   
 
 
+  
+
 
   
 
@@ -1125,16 +828,6 @@
   
 
   
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
   
 
   
