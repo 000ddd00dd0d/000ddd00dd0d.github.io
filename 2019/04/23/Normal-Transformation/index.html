@@ -96,20 +96,18 @@
 
 
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="keywords" content="sampling,采样,Monte Carlo,蒙特卡洛">
+  <meta name="description" content="&amp;emsp;&amp;emsp;在绘制物体的过程中，我们常常需要对物体的形状、位置等进行变换，从而可以从物体空间变换到世界空间，进而变换到相机空间，这些过程我们都可以通过矩阵乘法进行实现。对于点本身的位置$\textbf{p}$，假设我们有变换$\textbf{M}$，那么变换后的点位置为： $\textbf{p&apos;}=\textbf{Mp}$  &amp;emsp;&amp;emsp;对于切向量，由于其可以视为切平面上的">
+<meta name="keywords" content="Matrix Transform,矩阵变换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/index.html">
+<meta property="og:title" content="法向量变换 Normal Transformation">
+<meta property="og:url" content="http://yoursite.com/2019/04/23/Normal-Transformation/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;在绘制物体的过程中，我们常常需要对物体的形状、位置等进行变换，从而可以从物体空间变换到世界空间，进而变换到相机空间，这些过程我们都可以通过矩阵乘法进行实现。对于点本身的位置$\textbf{p}$，假设我们有变换$\textbf{M}$，那么变换后的点位置为： $\textbf{p&apos;}=\textbf{Mp}$  &amp;emsp;&amp;emsp;对于切向量，由于其可以视为切平面上的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
-<meta property="og:updated_time" content="2019-04-23T09:21:26.810Z">
+<meta property="og:updated_time" content="2019-04-23T15:35:11.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="twitter:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
+<meta name="twitter:title" content="法向量变换 Normal Transformation">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;在绘制物体的过程中，我们常常需要对物体的形状、位置等进行变换，从而可以从物体空间变换到世界空间，进而变换到相机空间，这些过程我们都可以通过矩阵乘法进行实现。对于点本身的位置$\textbf{p}$，假设我们有变换$\textbf{M}$，那么变换后的点位置为： $\textbf{p&apos;}=\textbf{Mp}$  &amp;emsp;&amp;emsp;对于切向量，由于其可以视为切平面上的">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/23/Normal-Transformation/">
 
 
 
@@ -127,7 +125,7 @@
   };
 </script>
 
-  <title>蒙特卡洛积分 Monte Carlo Integration | 000ddd00dd0d</title>
+  <title>法向量变换 Normal Transformation | 000ddd00dd0d</title>
   
 
 
@@ -326,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/Normal-Transformation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="000ddd00dd0d">
@@ -343,7 +341,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">蒙特卡洛积分 Monte Carlo Integration
+          <h1 class="post-title" itemprop="name headline">法向量变换 Normal Transformation
 
               
             
@@ -369,24 +367,12 @@
                 
               
 
-              <time title="Created: 2019-04-09 22:56:32" itemprop="dateCreated datePublished" datetime="2019-04-09T22:56:32+08:00">2019-04-09</time>
+              <time title="Created: 2019-04-23 22:59:26 / Modified: 23:35:11" itemprop="dateCreated datePublished" datetime="2019-04-23T22:59:26+08:00">2019-04-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-23 17:21:26" itemprop="dateModified" datetime="2019-04-23T17:21:26+08:00">2019-04-23</time>
               
             
           </span>
@@ -438,29 +424,24 @@
       
 
       
-        <p>&emsp;&emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法，我暂时还未得到证明。<br><a id="more"></a> </p>
-<h1 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h1><p>&emsp;&emsp; 那么接下来我们来看看蒙特卡洛积分描述了怎样一个过程。<br>&emsp;&emsp; 以一维的定积分$\int_{a}^{b}f(x)dx$为例，我们去找一个分布，其概率密度为：</p>
-<center>$pdf(x)=\left\{ \begin{array}{cccc}
-p(x) & x\in (a, b) \\
-0 & else \end{array}\right.$</center>
-&emsp;&emsp; 那么在该分布上的$f(x)$的期望为：
-<center>$E[f(x)]=\int_{a}^{b}f(x)p(x)dx$</center>
-&emsp;&emsp; 离散化后即可以有：
-<center>$E[f(x)]\approx \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center>
-&emsp;&emsp; 其中$x_i$是按照$pdf(x)$采样出的某一样本。到现在可以看到我们距离目标积分，只差把$p(x)$消除掉。考虑定义函数$g(x)=\frac{f(x)}{p(x)}$，在该分布下$g(x)$的期望则是：
-<center>$E[g(x)]=\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
-&emsp;&emsp; 综上所述，我们只要找到一个在该定义域上的分布，并且按照该分布采样多个样本$\{x_i\}^n$，最终将计算值求平均即得到该定积分的近似解：
-<center>$\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
+        <p>&emsp;&emsp;在绘制物体的过程中，我们常常需要对物体的形状、位置等进行变换，从而可以从物体空间变换到世界空间，进而变换到相机空间，这些过程我们都可以通过矩阵乘法进行实现。对于点本身的位置$\textbf{p}$，假设我们有变换$\textbf{M}$，那么变换后的点位置为：</p>
+<center>$\textbf{p'}=\textbf{Mp}$</center>
 
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>&emsp;&emsp; 一个比较常见的蒙特卡洛方法即投点法，如下图的rejective方法（取自维基百科）：<br><img src="/pictures/monte_carlo/sphere.gif" alt="sphere"><br>&emsp;&emsp; 那么怎么用上述推导来解释这个过程呢。我这里给了一个可能的解释，首先可以定义一个二维函数$f(x,y)$:</p>
-<p><center>$f(x,y)=\left\{ \begin{array}{cccc}
-1& x^2+y^2 \le 1\\
-0 & else \end{array}\right.$</center><br>&emsp;&emsp;那么红色部分的面积即为$\iint_{D}f(x,y)dxdy$，其中$D$为正方形区域。那么投点做了什么事呢——在正方形区域中均匀采样，故$pdf(x,y)=1$，所以可以得到：</p>
-<p><center>$\iint_{D}f(x,y)dxdy\approx  \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{pdf(x_i)} = \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center><br>这个求和即为：若采样点落在圆中，则计数加一，否则reject。</p>
-<h1 id="重要性采样"><a href="#重要性采样" class="headerlink" title="重要性采样"></a>重要性采样</h1><p>&emsp;&emsp; 关于重要性采样的在蒙特卡洛积分中的作用，我们可以看如下这个半球面积分的例子：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta$</center><br>&emsp;&emsp; 如果在半球面上进行均匀采样，蒙特卡洛方法如下：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{1}{2\pi}}\frac{1}{2\pi} d\theta\approx \frac{2\pi}{n}\sum_{i=1}^{n}cos\theta$</center><br>&emsp;&emsp; 而如果进行Cosine Weight的采样，则有如下结果：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{cos\theta}{\pi}}\frac{cos\theta}{\pi} d\theta\approx \frac{\pi}{n}\sum_{i=1}^{n}1$</center><br>&emsp;&emsp; 可以看到当我们的分布的概率密度刚好与$f(x)$差一个常数倍的话，我们甚至只需要采样一次。因此当分布于函数越相近时，我们所需要的采样数也就越少。</p>
+<p>&emsp;&emsp;对于切向量，由于其可以视为切平面上的一点，与模型中的点位置变换是一致的，于是可以对切向量$\textbf{t}$做相同的变换：</p>
+<center>$\textbf{t'}=\textbf{Mt}$</center>
+<a id="more"></a> 
+&emsp;&emsp;但对于法向量来说，若我们直接应用相同的变换，在诸如放缩的操作后，可能出现如下的情况：
+
+
+![failure_case](/pictures/normal_transform/failure.png)
+
+&emsp;&emsp;令变换前的切向量和法向量分别为$\textbf{t}$和$\textbf{n}$，以及变换后的结果分别为$\textbf{t‘}$和$\textbf{n’}$，那么希望有：
+<center>$\textbf{n'}^T\textbf{t'}=\textbf{n}^T\textbf{t}=0$</center>
+&emsp;&emsp;已知$\textbf{t}$的变换为$\textbf{M}$，假设对$\textbf{n}$的变换为$\textbf{G}$，那么有：
+<center>$\textbf{n'}^T\textbf{t'} = (\textbf{Gn}^T\textbf{Mt}= \textbf{n}^T\textbf{G}^T \textbf{Mt}=0$</center>
+
+<p>&emsp;&emsp;于是可以预见的一个解为$\textbf{G}^T \textbf{M}=\textbf{I}$，可以得到：</p>
+<p><center>$\textbf{G}=(\textbf{M}^{-1})^T$</center><br>&emsp;&emsp;但该方法要求$\textbf{M}$<strong>可逆</strong>，以及该变换不保证向量长度不变，因此可能需要<strong>归一化</strong>。另一种方法是计算法向量端点位置$\textbf{p}_1$、$\textbf{p}_2$，分别进行变换，再计算变换后的结果$\textbf{p’}_2-\textbf{p’}_1$。<br>&emsp;&emsp;并且对于平移我们是不必在乎的，所以可以只关注左上角3*3的部分。若变换只包含旋转和平移，我们也可以直接应用原变换，并且不需要重新归一化。</p>
 
       
     </div>
@@ -484,13 +465,9 @@ p(x) & x\in (a, b) \\
       
         <div class="post-tags">
           
-            <a href="/Tags/sampling/" rel="tag"># sampling</a>
+            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
           
-            <a href="/Tags/采样/" rel="tag"># 采样</a>
-          
-            <a href="/Tags/Monte-Carlo/" rel="tag"># Monte Carlo</a>
-          
-            <a href="/Tags/蒙特卡洛/" rel="tag"># 蒙特卡洛</a>
+            <a href="/Tags/矩阵变换/" rel="tag"># 矩阵变换</a>
           
         </div>
       
@@ -503,8 +480,8 @@ p(x) & x\in (a, b) \\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/07/Spherical-Sampling/" rel="next" title="球面采样 Spherical Sampling">
-                <i class="fa fa-chevron-left"></i> 球面采样 Spherical Sampling
+              <a href="/2019/04/23/lookAt-function/" rel="next" title="lookAt() 函数">
+                <i class="fa fa-chevron-left"></i> lookAt() 函数
               </a>
             
           </div>
@@ -512,10 +489,6 @@ p(x) & x\in (a, b) \\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/23/lookAt-function/" rel="prev" title="lookAt() 函数">
-                lookAt() 函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,17 +532,8 @@ p(x) & x\in (a, b) \\
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -669,23 +633,6 @@ p(x) & x\in (a, b) \\
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法说明"><span class="nav-number">1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重要性采样"><span class="nav-number">3.</span> <span class="nav-text">重要性采样</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
