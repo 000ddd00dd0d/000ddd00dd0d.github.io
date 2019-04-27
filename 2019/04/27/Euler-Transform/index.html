@@ -96,20 +96,18 @@
 
 
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="keywords" content="sampling,采样,Monte Carlo,蒙特卡洛">
+  <meta name="description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
+<meta name="keywords" content="Matrix Transform,矩阵变换,欧拉,旋转,Euler,Rotation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/index.html">
+<meta property="og:title" content="欧拉角 Euler Angle">
+<meta property="og:url" content="http://yoursite.com/2019/04/27/Euler-Transform/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
+<meta property="og:description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
-<meta property="og:updated_time" content="2019-04-23T09:21:26.810Z">
+<meta property="og:updated_time" content="2019-04-27T16:02:27.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="twitter:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
+<meta name="twitter:title" content="欧拉角 Euler Angle">
+<meta name="twitter:description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/27/Euler-Transform/">
 
 
 
@@ -127,7 +125,7 @@
   };
 </script>
 
-  <title>蒙特卡洛积分 Monte Carlo Integration | 000ddd00dd0d</title>
+  <title>欧拉角 Euler Angle | 000ddd00dd0d</title>
   
 
 
@@ -326,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/Euler-Transform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="000ddd00dd0d">
@@ -343,7 +341,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">蒙特卡洛积分 Monte Carlo Integration
+          <h1 class="post-title" itemprop="name headline">欧拉角 Euler Angle
 
               
             
@@ -369,7 +367,7 @@
                 
               
 
-              <time title="Created: 2019-04-09 22:56:32" itemprop="dateCreated datePublished" datetime="2019-04-09T22:56:32+08:00">2019-04-09</time>
+              <time title="Created: 2019-04-27 22:25:00" itemprop="dateCreated datePublished" datetime="2019-04-27T22:25:00+08:00">2019-04-27</time>
             
 
             
@@ -386,7 +384,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-23 17:21:26" itemprop="dateModified" datetime="2019-04-23T17:21:26+08:00">2019-04-23</time>
+                <time title="Modified: 2019-04-28 00:02:27" itemprop="dateModified" datetime="2019-04-28T00:02:27+08:00">2019-04-28</time>
               
             
           </span>
@@ -438,29 +436,36 @@
       
 
       
-        <p>&emsp;&emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法，我暂时还未得到证明。<br><a id="more"></a> </p>
-<h1 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h1><p>&emsp;&emsp; 那么接下来我们来看看蒙特卡洛积分描述了怎样一个过程。<br>&emsp;&emsp; 以一维的定积分$\int_{a}^{b}f(x)dx$为例，我们去找一个分布，其概率密度为：</p>
-<center>$pdf(x)=\left\{ \begin{array}{cccc}
-p(x) & x\in (a, b) \\
-0 & else \end{array}\right.$</center>
-&emsp;&emsp; 那么在该分布上的$f(x)$的期望为：
-<center>$E[f(x)]=\int_{a}^{b}f(x)p(x)dx$</center>
-&emsp;&emsp; 离散化后即可以有：
-<center>$E[f(x)]\approx \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center>
-&emsp;&emsp; 其中$x_i$是按照$pdf(x)$采样出的某一样本。到现在可以看到我们距离目标积分，只差把$p(x)$消除掉。考虑定义函数$g(x)=\frac{f(x)}{p(x)}$，在该分布下$g(x)$的期望则是：
-<center>$E[g(x)]=\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
-&emsp;&emsp; 综上所述，我们只要找到一个在该定义域上的分布，并且按照该分布采样多个样本$\{x_i\}^n$，最终将计算值求平均即得到该定积分的近似解：
-<center>$\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>&emsp;&emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转：</p>
+<center>$\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$</center>
 
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>&emsp;&emsp; 一个比较常见的蒙特卡洛方法即投点法，如下图的rejective方法（取自维基百科）：<br><img src="/pictures/monte_carlo/sphere.gif" alt="sphere"><br>&emsp;&emsp; 那么怎么用上述推导来解释这个过程呢。我这里给了一个可能的解释，首先可以定义一个二维函数$f(x,y)$:</p>
-<p><center>$f(x,y)=\left\{ \begin{array}{cccc}
-1& x^2+y^2 \le 1\\
-0 & else \end{array}\right.$</center><br>&emsp;&emsp;那么红色部分的面积即为$\iint_{D}f(x,y)dxdy$，其中$D$为正方形区域。那么投点做了什么事呢——在正方形区域中均匀采样，故$pdf(x,y)=1$，所以可以得到：</p>
-<p><center>$\iint_{D}f(x,y)dxdy\approx  \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{pdf(x_i)} = \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center><br>这个求和即为：若采样点落在圆中，则计数加一，否则reject。</p>
-<h1 id="重要性采样"><a href="#重要性采样" class="headerlink" title="重要性采样"></a>重要性采样</h1><p>&emsp;&emsp; 关于重要性采样的在蒙特卡洛积分中的作用，我们可以看如下这个半球面积分的例子：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta$</center><br>&emsp;&emsp; 如果在半球面上进行均匀采样，蒙特卡洛方法如下：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{1}{2\pi}}\frac{1}{2\pi} d\theta\approx \frac{2\pi}{n}\sum_{i=1}^{n}cos\theta$</center><br>&emsp;&emsp; 而如果进行Cosine Weight的采样，则有如下结果：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{cos\theta}{\pi}}\frac{cos\theta}{\pi} d\theta\approx \frac{\pi}{n}\sum_{i=1}^{n}1$</center><br>&emsp;&emsp; 可以看到当我们的分布的概率密度刚好与$f(x)$差一个常数倍的话，我们甚至只需要采样一次。因此当分布于函数越相近时，我们所需要的采样数也就越少。</p>
+<p>&emsp;&emsp;一般定义:<br>&emsp;&emsp;&emsp;&emsp;Yaw（偏航）：y<br>&emsp;&emsp;&emsp;&emsp;Pitch（俯仰）：x<br>&emsp;&emsp;&emsp;&emsp;Roll（翻滚）： z<br><a id="more"></a> </p>
+<p>&emsp;&emsp;这里即可以看出其中一个问题，即<strong>旋转顺序对结果会产生影响</strong>，因此在不同的系统中若要进行移植需要确定坐标系朝向，以及相应的欧拉角顺序。此外该方法可能出现<strong>万向锁（Gimbal Lock）</strong>，说明该问题前，我们先把$\textbf{E}(h,p,r)$展开：</p>
+<center>$\textbf{E}(h,p,r)=\left[\begin{array}{cccc}
+c_z c_y - s_z s_x s_y & -s_z c_x & c_z s_y + s_z s_x c_y \\
+s_z c_y + c_z s_x s_y & c_z c_x & s_z s_y - c_z s_x c_y \\
+-c_x s_y & s_x & c_x c_y \end{array}\right] $</center>
+这里当$c_x=0, s_x=\pm 1$时，上式可以转换为：
+<center>$\textbf{E}(h,p,r)=\left[\begin{array}{cccc}
+c_z c_y \mp s_z  s_y & 0 & c_z s_y \pm s_z s_x c_y \\
+s_z c_y \pm c_z s_x s_y & 0 & s_z s_y \mp c_z s_x c_y \\
+0 & \pm 1 & 0 \end{array}\right] = \left[\begin{array}{cccc}
+cos(r\pm h) & 0 & sin(r\pm h)  \\
+sin(r\pm h)  & 0 & -cos(r\pm h)  \\
+0 & \pm1 & 0 \end{array}\right] $</center>
+
+<p>可以看出这种情况下$r$和$h$是绕着同一个轴同向或反向旋转。</p>
+<h1 id="求解参数"><a href="#求解参数" class="headerlink" title="求解参数"></a>求解参数</h1><p>&emsp;&emsp;很容易发现，当我们有欧拉角时，计算相应的旋转矩阵会很容易。但当我们有旋转矩阵，希望得到欧拉角就很难直观地想到结果，假如我们得到如下的旋转矩阵：</p>
+<p><center>$\textbf{E}=\left[\begin{array}{cccc}
+e_{00} & e_{01} & e_{02} \\
+e_{10} & e_{11}  & e_{11}  \\
+e_{20}  & e_{21} & e_{22} \end{array}\right] $</center><br>&emsp;&emsp;根据上述推导，很容易有：</p>
+<p><center>$\frac{e_{01}}{e_{11}} = \frac{-s_z}{c_z}=-tan_z$</center></p>
+<p><center>$\frac{e_{20}}{e_{22}} = \frac{-s_y}{c_y}=-tan_y$</center></p>
+<p><center>$e_{21}=sin_x$</center><br>&emsp;&emsp;于是可以得到：</p>
+<p><center>$h = atan2(-e_{20}, e_{22}) \\
+p = arcsin(e_{21}) \\ 
+r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在， 在死锁中或死锁附近时，上述结果可能有很多组解，就可能<strong>准确插值变得困难</strong>，比如对于起点A和重点B，每次插值选择一个近似解，在死锁附近时，这个解的取值范围可能很广（如死锁时可以有无数组r-h解），那么我们插出来的结果就可能产生抖动。</p>
 
       
     </div>
@@ -484,13 +489,17 @@ p(x) & x\in (a, b) \\
       
         <div class="post-tags">
           
-            <a href="/Tags/sampling/" rel="tag"># sampling</a>
+            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
           
-            <a href="/Tags/采样/" rel="tag"># 采样</a>
+            <a href="/Tags/矩阵变换/" rel="tag"># 矩阵变换</a>
           
-            <a href="/Tags/Monte-Carlo/" rel="tag"># Monte Carlo</a>
+            <a href="/Tags/欧拉/" rel="tag"># 欧拉</a>
           
-            <a href="/Tags/蒙特卡洛/" rel="tag"># 蒙特卡洛</a>
+            <a href="/Tags/旋转/" rel="tag"># 旋转</a>
+          
+            <a href="/Tags/Euler/" rel="tag"># Euler</a>
+          
+            <a href="/Tags/Rotation/" rel="tag"># Rotation</a>
           
         </div>
       
@@ -503,8 +512,8 @@ p(x) & x\in (a, b) \\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/07/Spherical-Sampling/" rel="next" title="球面采样 Spherical Sampling">
-                <i class="fa fa-chevron-left"></i> 球面采样 Spherical Sampling
+              <a href="/2019/04/23/Normal-Transformation/" rel="next" title="法向量变换 Normal Transformation">
+                <i class="fa fa-chevron-left"></i> 法向量变换 Normal Transformation
               </a>
             
           </div>
@@ -512,10 +521,6 @@ p(x) & x\in (a, b) \\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/23/lookAt-function/" rel="prev" title="lookAt() 函数">
-                lookAt() 函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +693,7 @@ p(x) & x\in (a, b) \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法说明"><span class="nav-number">1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重要性采样"><span class="nav-number">3.</span> <span class="nav-text">重要性采样</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解参数"><span class="nav-number">2.</span> <span class="nav-text">求解参数</span></a></li></ol></div>
             
 
           </div>
