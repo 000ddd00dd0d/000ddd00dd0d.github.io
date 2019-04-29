@@ -96,20 +96,21 @@
 
 
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="keywords" content="sampling,采样,Monte Carlo,蒙特卡洛">
+  <meta name="description" content="简单的想法&amp;emsp;&amp;emsp;一般来说我们可以很容易写出绕坐标轴$x,y,z$旋转任意角度$\theta$的旋转矩阵，这里分别用$\textbf{R}_x(\theta), \textbf{R}_y(\theta), \textbf{R}_z(\theta)$来表示。但更多时候，我们希望给出任意轴$\textbf{r}$和任意角度$\alpha$的旋转矩阵$\textbf{X}$。一个简单的想">
+<meta name="keywords" content="旋转,矩阵变换,Rotation,Matrix Transform">
 <meta property="og:type" content="article">
-<meta property="og:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/index.html">
+<meta property="og:title" content="轴向角 Axis Rotation">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/Axis-Rotation/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
+<meta property="og:description" content="简单的想法&amp;emsp;&amp;emsp;一般来说我们可以很容易写出绕坐标轴$x,y,z$旋转任意角度$\theta$的旋转矩阵，这里分别用$\textbf{R}_x(\theta), \textbf{R}_y(\theta), \textbf{R}_z(\theta)$来表示。但更多时候，我们希望给出任意轴$\textbf{r}$和任意角度$\alpha$的旋转矩阵$\textbf{X}$。一个简单的想">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
-<meta property="og:updated_time" content="2019-04-23T09:21:26.810Z">
+<meta property="og:image" content="http://yoursite.com/pictures/axis_rotation/axis_rotation.png">
+<meta property="og:image" content="http://yoursite.com/pictures/axis_rotation/direct_rotation.png">
+<meta property="og:updated_time" content="2019-04-29T11:49:41.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蒙特卡洛积分 Monte Carlo Integration">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法">
-<meta name="twitter:image" content="http://yoursite.com/pictures/monte_carlo/sphere.gif">
+<meta name="twitter:title" content="轴向角 Axis Rotation">
+<meta name="twitter:description" content="简单的想法&amp;emsp;&amp;emsp;一般来说我们可以很容易写出绕坐标轴$x,y,z$旋转任意角度$\theta$的旋转矩阵，这里分别用$\textbf{R}_x(\theta), \textbf{R}_y(\theta), \textbf{R}_z(\theta)$来表示。但更多时候，我们希望给出任意轴$\textbf{r}$和任意角度$\alpha$的旋转矩阵$\textbf{X}$。一个简单的想">
+<meta name="twitter:image" content="http://yoursite.com/pictures/axis_rotation/axis_rotation.png">
 
 
 
@@ -117,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/28/Axis-Rotation/">
 
 
 
@@ -127,7 +128,7 @@
   };
 </script>
 
-  <title>蒙特卡洛积分 Monte Carlo Integration | 000ddd00dd0d</title>
+  <title>轴向角 Axis Rotation | 000ddd00dd0d</title>
   
 
 
@@ -326,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/Monte-Carlo-Integration/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/Axis-Rotation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="000ddd00dd0d">
@@ -343,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">蒙特卡洛积分 Monte Carlo Integration
+          <h1 class="post-title" itemprop="name headline">轴向角 Axis Rotation
 
               
             
@@ -369,7 +370,7 @@
                 
               
 
-              <time title="Created: 2019-04-09 22:56:32" itemprop="dateCreated datePublished" datetime="2019-04-09T22:56:32+08:00">2019-04-09</time>
+              <time title="Created: 2019-04-28 00:05:10" itemprop="dateCreated datePublished" datetime="2019-04-28T00:05:10+08:00">2019-04-28</time>
             
 
             
@@ -386,7 +387,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-23 17:21:26" itemprop="dateModified" datetime="2019-04-23T17:21:26+08:00">2019-04-23</time>
+                <time title="Modified: 2019-04-29 19:49:41" itemprop="dateModified" datetime="2019-04-29T19:49:41+08:00">2019-04-29</time>
               
             
           </span>
@@ -438,29 +439,63 @@
       
 
       
-        <p>&emsp;&emsp;根据维基百科，蒙特卡洛积分法是基于随机数的数值积分方法，用于计算定积分。对于高维的积分该方法具有巨大优势，因为蒙特卡洛方法是基于随机采样的方法，而很多其他方法是基于grid的，即将空间分割为不同的grid，最终将每个grid中的计算结果汇总，在n维的情况下这些方法就是O(n)的空间复杂度，而蒙特卡洛仍为O(1)，但要达到相同的精度，所需要的采样数量是否一定优于grid的方法，我暂时还未得到证明。<br><a id="more"></a> </p>
-<h1 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h1><p>&emsp;&emsp; 那么接下来我们来看看蒙特卡洛积分描述了怎样一个过程。<br>&emsp;&emsp; 以一维的定积分$\int_{a}^{b}f(x)dx$为例，我们去找一个分布，其概率密度为：</p>
-<center>$pdf(x)=\left\{ \begin{array}{cccc}
-p(x) & x\in (a, b) \\
-0 & else \end{array}\right.$</center>
-&emsp;&emsp; 那么在该分布上的$f(x)$的期望为：
-<center>$E[f(x)]=\int_{a}^{b}f(x)p(x)dx$</center>
-&emsp;&emsp; 离散化后即可以有：
-<center>$E[f(x)]\approx \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center>
-&emsp;&emsp; 其中$x_i$是按照$pdf(x)$采样出的某一样本。到现在可以看到我们距离目标积分，只差把$p(x)$消除掉。考虑定义函数$g(x)=\frac{f(x)}{p(x)}$，在该分布下$g(x)$的期望则是：
-<center>$E[g(x)]=\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
-&emsp;&emsp; 综上所述，我们只要找到一个在该定义域上的分布，并且按照该分布采样多个样本$\{x_i\}^n$，最终将计算值求平均即得到该定积分的近似解：
-<center>$\int_{a}^{b}f(x)dx\approx \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{p(x_i)}$</center>
+        <h1 id="简单的想法"><a href="#简单的想法" class="headerlink" title="简单的想法"></a>简单的想法</h1><p>&emsp;&emsp;一般来说我们可以很容易写出绕坐标轴$x,y,z$旋转任意角度$\theta$的旋转矩阵，这里分别用$\textbf{R}_x(\theta), \textbf{R}_y(\theta), \textbf{R}_z(\theta)$来表示。但更多时候，我们希望给出任意轴$\textbf{r}$和任意角度$\alpha$的旋转矩阵$\textbf{X}$。一个简单的想法即将$\textbf{s}$构成的局部坐标系$Orst$变换到$Oxyz$上，然后应用相应的旋转，最后反变换回去，如下图所示：<br><img src="/pictures/axis_rotation/axis_rotation.png" alt="axis_rotation"></p>
+<a id="more"></a> 
+<p>&emsp;&emsp;首先我们计算$\textbf{M}$，按照Real-Time Rendering (4th Edition)中，一个比较稳定的方法即将绝对值最小值置零，然后交换剩下的值并将前一个值取负，可以验证该方法生成的向量与$\textbf{r}$垂直，只是需要进一步归一化，于是可以有：</p>
+<center>$\overline{\textbf{s}}=\left\{\begin{array}{cccc}
+(0,-r_z,r_y) & if\ |r_x|\le|r_y|\ and\ |r_x|\le|r_z| \\
+(-r_z,0,r_x) & if\ |r_y|\le|r_x|\ and\ |r_y|\le|r_z| \\
+(-r_y,r_x,0) & if\ |r_z|\le|r_x|\ and\ |r_z|\le|r_y| \end{array}\right. \\
+\textbf{s}=normalize(\overline{\textbf{s}}) \\
+\textbf{t} = \textbf{r}\times \textbf{s}$</center>
+&emsp;&emsp;对应的即可以得到$\textbf{M}$:
+<center>$\textbf{M}=\left[\begin{array}{cccc}
+\textbf{r}^T \\
+\textbf{s}^T \\
+\textbf{r}^T \end{array}\right]$</center>
+&emsp;&emsp;按照上述的坐标轴转换，最终的旋转矩阵即可以表示为：
+<center>$\textbf{M}=\textbf{M}^T\textbf{R}_x(\alpha)\textbf{M}$</center>
 
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>&emsp;&emsp; 一个比较常见的蒙特卡洛方法即投点法，如下图的rejective方法（取自维基百科）：<br><img src="/pictures/monte_carlo/sphere.gif" alt="sphere"><br>&emsp;&emsp; 那么怎么用上述推导来解释这个过程呢。我这里给了一个可能的解释，首先可以定义一个二维函数$f(x,y)$:</p>
-<p><center>$f(x,y)=\left\{ \begin{array}{cccc}
-1& x^2+y^2 \le 1\\
-0 & else \end{array}\right.$</center><br>&emsp;&emsp;那么红色部分的面积即为$\iint_{D}f(x,y)dxdy$，其中$D$为正方形区域。那么投点做了什么事呢——在正方形区域中均匀采样，故$pdf(x,y)=1$，所以可以得到：</p>
-<p><center>$\iint_{D}f(x,y)dxdy\approx  \frac{1}{n}\sum_{i=1}^{n}\frac{f(x_i)}{pdf(x_i)} = \frac{1}{n}\sum_{i=1}^{n}f(x_i)$</center><br>这个求和即为：若采样点落在圆中，则计数加一，否则reject。</p>
-<h1 id="重要性采样"><a href="#重要性采样" class="headerlink" title="重要性采样"></a>重要性采样</h1><p>&emsp;&emsp; 关于重要性采样的在蒙特卡洛积分中的作用，我们可以看如下这个半球面积分的例子：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta$</center><br>&emsp;&emsp; 如果在半球面上进行均匀采样，蒙特卡洛方法如下：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{1}{2\pi}}\frac{1}{2\pi} d\theta\approx \frac{2\pi}{n}\sum_{i=1}^{n}cos\theta$</center><br>&emsp;&emsp; 而如果进行Cosine Weight的采样，则有如下结果：</p>
-<p><center>$\iint_{\Omega}cos\theta d\theta=\iint_{\Omega}\frac{cos\theta}{\frac{cos\theta}{\pi}}\frac{cos\theta}{\pi} d\theta\approx \frac{\pi}{n}\sum_{i=1}^{n}1$</center><br>&emsp;&emsp; 可以看到当我们的分布的概率密度刚好与$f(x)$差一个常数倍的话，我们甚至只需要采样一次。因此当分布于函数越相近时，我们所需要的采样数也就越少。</p>
+<h1 id="glm-rotate"><a href="#glm-rotate" class="headerlink" title="glm::rotate()"></a>glm::rotate()</h1><p>&emsp;&emsp;然而很容易发现该方案效率较低，需要多个计算，在glm::rotate()中，使用了Graphics Gems (1st Edition)中提到的另一种方法。该方法更直观地在旋转轴上进行操作，如下图所示。<br><img src="/pictures/axis_rotation/direct_rotation.png" alt="direct_rotation"></p>
+<p>&emsp;&emsp;首先我们有归一化的旋转轴$\textbf{r}$和任意需要旋转的点，这里用向量$\textbf{p}$表示，以及旋转角度$\phi$后的位置$\textbf{p’}$。如上图所示，我们将$\textbf{p}$投影到$\textbf{r}$上得到相应的投影向量：</p>
+<center>$\textbf{r'}=||\textbf{p}||cos\theta\ \textbf{r} = (\textbf{p}\cdot\textbf{r})\textbf{r}$</center>
+&emsp;&emsp;将$\textbf{x}=\textbf{p}-\textbf{r'}$作为旋转起始轴构建局部二维坐标系$\textbf{x}\textbf{y}$，那么在该局部坐标系下的旋转和最终的旋转结果即可表示为：
+<center>$\textbf{t'}=cos\phi\ \textbf{x}+sin\phi\ \textbf{y} \\
+\textbf{p'}=\textbf{r'}+\textbf{t'}=\textbf{r'}+cos\phi\ \textbf{x}+sin\phi\ \textbf{y}$</center>
+上述已知$\textbf{r'}$，于是我们现在开始分别计算$\textbf{x}$，$\textbf{y}$：
+<center>$\textbf{x}=\textbf{p}-\textbf{r'} =\textbf{p}- (\textbf{p}\cdot\textbf{r})\textbf{r} \\
+\textbf{y} = \textbf{r}\times\textbf{p}$</center>
+可以验证$||\textbf{x}||=||\textbf{p}||sin\theta=||\textbf{y}||$，然后将$\textbf{p'}$的计算式改写为：
+<center>$\textbf{p'} = (\textbf{p}\cdot\textbf{r})\textbf{r}+cos\phi\ (\textbf{p}- (\textbf{p}\cdot\textbf{r})\textbf{r})+sin\phi\ \textbf{r}\times\textbf{p} \\
+= cos\phi \textbf{p}+ (1-cos\phi)(\textbf{p}\cdot\textbf{r})\textbf{r}+sin\phi\ \textbf{r}\times\textbf{p} $</center>
+&emsp;&emsp;接下来想办法将$\textbf{p}$提出来，剩下的算式组成的矩阵即是我们需要的旋转矩阵。在Graphics Gems (1st Edition)给出了如下的几个公式：
+<center>$\textbf{p}=\textbf{Ip} \\
+(\textbf{p}\cdot\textbf{r})\textbf{r} = \textbf{r}(\textbf{r}^T\textbf{p})=\left[\begin{array}{cccc}
+r_x^2 & r_xr_y & r_xr_z \\
+r_xr_y & r_y^2 & r_yr_z \\
+r_xr_z & r_yr_z & r_z^2\end{array}\right]\textbf{p}\\
+ \textbf{r}\times\textbf{p}=\left[\begin{array}{cccc}
+r_y p_z - r_z p_y  \\
+r_z p_x - r_x p_z \\
+r_x p_y - r_y p_x \end{array}\right] =  \left[\begin{array}{cccc}
+0 & -r_z & r_y \\
+r_z & 0 & -r_x \\
+-r_y & r_x & 0 \end{array}\right]\textbf{p}$</center>
+于是有：
+<center>$\textbf{p'} = (cos\phi \textbf{I}+ (1-cos\phi)\left[\begin{array}{cccc}
+r_x^2 & r_xr_y & r_xr_z \\
+r_xr_y & r_y^2 & r_yr_z \\
+r_xr_z & r_yr_z & r_z^2\end{array}\right]+sin\phi\left[\begin{array}{cccc}
+0 & -r_z & r_y \\
+r_z & 0 & -r_x \\
+-r_y & r_x & 0 \end{array}\right]) \textbf{p}$</center>
+&emsp;&emsp;综上所述我们可以将该旋转矩阵表示为：
+<center>$\textbf{M}=\left[\begin{array}{cccc}
+cos\phi+(1-cos\phi)r_x^2 & (1-cos\phi)r_xr_y-r_zsin\phi & (1-cos\phi)r_xr_z+r_ysin\phi \\
+(1-cos\phi)r_xr_y+r_zsin\phi & cos\phi+(1-cos\phi)r_y^2 & (1-cos\phi)r_yr_z-r_xsin\phi \\
+(1-cos\phi)r_xr_z-r_ysin\phi & (1-cos\phi)r_yr_z+r_xsin\phi & cos\phi+(1-cos\phi)r_z^2 \end{array}\right]$</center>
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>Real-Time Rendering (4th Edition)<br>Graphics Gems (1st Edition)</p>
 
       
     </div>
@@ -484,13 +519,13 @@ p(x) & x\in (a, b) \\
       
         <div class="post-tags">
           
-            <a href="/Tags/sampling/" rel="tag"># sampling</a>
+            <a href="/Tags/旋转/" rel="tag"># 旋转</a>
           
-            <a href="/Tags/采样/" rel="tag"># 采样</a>
+            <a href="/Tags/矩阵变换/" rel="tag"># 矩阵变换</a>
           
-            <a href="/Tags/Monte-Carlo/" rel="tag"># Monte Carlo</a>
+            <a href="/Tags/Rotation/" rel="tag"># Rotation</a>
           
-            <a href="/Tags/蒙特卡洛/" rel="tag"># 蒙特卡洛</a>
+            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
           
         </div>
       
@@ -503,8 +538,8 @@ p(x) & x\in (a, b) \\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/07/Spherical-Sampling/" rel="next" title="球面采样 Spherical Sampling">
-                <i class="fa fa-chevron-left"></i> 球面采样 Spherical Sampling
+              <a href="/2019/04/27/Euler-Transform/" rel="next" title="欧拉角 Euler Angle">
+                <i class="fa fa-chevron-left"></i> 欧拉角 Euler Angle
               </a>
             
           </div>
@@ -512,10 +547,6 @@ p(x) & x\in (a, b) \\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/23/lookAt-function/" rel="prev" title="lookAt() 函数">
-                lookAt() 函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -684,7 +715,7 @@ p(x) & x\in (a, b) \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法说明"><span class="nav-number">1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重要性采样"><span class="nav-number">3.</span> <span class="nav-text">重要性采样</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单的想法"><span class="nav-number">1.</span> <span class="nav-text">简单的想法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#glm-rotate"><span class="nav-number">2.</span> <span class="nav-text">glm::rotate()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

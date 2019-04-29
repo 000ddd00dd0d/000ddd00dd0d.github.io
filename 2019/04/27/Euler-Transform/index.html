@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
-<meta name="keywords" content="Matrix Transform,矩阵变换,欧拉,旋转,Euler,Rotation">
+<meta name="keywords" content="旋转,矩阵变换,Rotation,Matrix Transform">
 <meta property="og:type" content="article">
 <meta property="og:title" content="欧拉角 Euler Angle">
 <meta property="og:url" content="http://yoursite.com/2019/04/27/Euler-Transform/index.html">
 <meta property="og:site_name" content="000ddd00dd0d">
 <meta property="og:description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-27T16:02:27.073Z">
+<meta property="og:updated_time" content="2019-04-27T16:18:06.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="欧拉角 Euler Angle">
 <meta name="twitter:description" content="定义&amp;emsp;&amp;emsp;欧拉角通过基于三个基础坐标轴的旋转角度生成一个矩阵，用于对坐标或坐标系的旋转。首先我们需要规定一个旋转顺序，这里按照Real-Time Rendering (4th Edition)中的规定，按照如下顺序进行旋转： $\textbf{E}(h,p,r)=\textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_y(h)$  &amp;emsp;&amp;emsp">
@@ -384,7 +384,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-28 00:02:27" itemprop="dateModified" datetime="2019-04-28T00:02:27+08:00">2019-04-28</time>
+                <time title="Modified: 2019-04-28 00:18:06" itemprop="dateModified" datetime="2019-04-28T00:18:06+08:00">2019-04-28</time>
               
             
           </span>
@@ -466,6 +466,7 @@ e_{20}  & e_{21} & e_{22} \end{array}\right] $</center><br>&emsp;&emsp;根据上
 <p><center>$h = atan2(-e_{20}, e_{22}) \\
 p = arcsin(e_{21}) \\ 
 r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在， 在死锁中或死锁附近时，上述结果可能有很多组解，就可能<strong>准确插值变得困难</strong>，比如对于起点A和重点B，每次插值选择一个近似解，在死锁附近时，这个解的取值范围可能很广（如死锁时可以有无数组r-h解），那么我们插出来的结果就可能产生抖动。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>Real-Time Rendering (4th Edition)</p>
 
       
     </div>
@@ -489,17 +490,13 @@ r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在�
       
         <div class="post-tags">
           
-            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
+            <a href="/Tags/旋转/" rel="tag"># 旋转</a>
           
             <a href="/Tags/矩阵变换/" rel="tag"># 矩阵变换</a>
           
-            <a href="/Tags/欧拉/" rel="tag"># 欧拉</a>
-          
-            <a href="/Tags/旋转/" rel="tag"># 旋转</a>
-          
-            <a href="/Tags/Euler/" rel="tag"># Euler</a>
-          
             <a href="/Tags/Rotation/" rel="tag"># Rotation</a>
+          
+            <a href="/Tags/Matrix-Transform/" rel="tag"># Matrix Transform</a>
           
         </div>
       
@@ -521,6 +518,10 @@ r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/28/Axis-Rotation/" rel="prev" title="轴向角 Axis Rotation">
+                轴向角 Axis Rotation <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -589,7 +590,7 @@ r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -651,11 +652,7 @@ r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在�
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -693,7 +690,7 @@ r = atan2(-e_{01}, e_{11})$</center><br>&emsp;&emsp;于是由于死锁的存在�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解参数"><span class="nav-number">2.</span> <span class="nav-text">求解参数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解参数"><span class="nav-number">2.</span> <span class="nav-text">求解参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
