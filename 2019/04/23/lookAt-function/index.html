@@ -448,6 +448,19 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/04/23/lookAt-function/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/04/23/lookAt-function/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -616,6 +629,13 @@ u_x & u_y & u_z & \textbf{u}\cdot\textbf{t} \\
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
 
   
 
@@ -904,6 +924,40 @@ u_x & u_y & u_z & \textbf{u}\cdot\textbf{t} \\
 
   
 
+
+  
+    <!-- LOCAL: You can save these files to your site and update links -->
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
+<!-- END LOCAL -->
+
+<script>
+  function renderGitment() {
+    var gitment = new Gitmint({
+      id: window.location.pathname,
+      owner: '000ddd00dd0d',
+      repo: '000ddd00dd0d.github.io',
+      
+        lang: 'zh-Hans' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+      
+      oauth: {
+      
+      
+        client_secret: 'd3031ffcff391b33f6c54e2e2e1a76757c2b5abe',
+      
+        client_id: '1185be7512c28080a238'
+      }
+    });
+    gitment.render('gitment-container');
+  }
+
+  
+    renderGitment();
+  
+</script>
 
   
 
