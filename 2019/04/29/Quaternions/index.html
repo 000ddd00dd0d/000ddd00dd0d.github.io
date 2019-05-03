@@ -113,7 +113,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://000ddd00dd0d.github.io/pictures/quaternions/axis_rotation.png">
 <meta property="og:image" content="http://000ddd00dd0d.github.io/pictures/quaternions/quaternions.png">
-<meta property="og:updated_time" content="2019-05-01T04:49:14.897Z">
+<meta property="og:image" content="http://000ddd00dd0d.github.io/pictures/quaternions/interpolation.png">
+<meta property="og:image" content="http://000ddd00dd0d.github.io/pictures/quaternions/vector_rotation.png">
+<meta property="og:updated_time" content="2019-05-03T08:30:31.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="四元数 Quaternions">
 <meta name="twitter:description" content="1. 数学定义&amp;emsp;&amp;emsp;在进行四元数对旋转的作用探讨前，我们先看一下四元数的定义，并不管三七二十一扔出一堆公式以供后续使用。首先四元数是一种超复数，与简单复数仅包含一个虚部$i$，四元数包含三个虚部$i,j,k$和一个实部，这里定义四元数入下： $\hat{\textbf{q}}=(\textbf{q}_v, q_w)=iq_x+jq_y+kq_z+q_w \\ \textbf{q}">
@@ -428,7 +430,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-01 12:49:14" itemprop="dateModified" datetime="2019-05-01T12:49:14+08:00">2019-05-01</time>
+                <time title="修改时间：2019-05-03 16:30:31" itemprop="dateModified" datetime="2019-05-03T16:30:31+08:00">2019-05-03</time>
               
             
           </span>
@@ -516,8 +518,8 @@
 <center>$\textbf{y}\times\textbf{u}=\textbf{x}$</center>
 <center>$\textbf{p}\cdot\textbf{u}=||\textbf{u'}||$</center>
 
-<p>接下来即可以尝试将上述公式展开：</p>
-<p><center>$$\require{enclose}
+<p>接下来即可以尝试将上述公式展开<br>：</p>
+<center>$$\require{enclose}
 \begin{align*}  
 \hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{-1} &= (sin\phi \textbf{u}_q, cos\phi)(\textbf{p}_v, p_w)(-sin\phi \textbf{u}_q, cos\phi) \\  
 &= (sin\phi \textbf{u}_q\times\textbf{p}_v + p_wsin\phi \textbf{u}_q+cos\phi\textbf{p}_v, p_wcos\phi-sin\phi(\textbf{u}_q\cdot\textbf{p}_v))(-sin\phi \textbf{u}_q, cos\phi)  \\  
@@ -526,12 +528,194 @@
 &\ \ \ \ + (sin\phi cos\phi \textbf{y} + \enclose{horizontalstrike}{p_wsin\phi cos\phi\textbf{u}_q} + cos^2\textbf{p}_v) \\
 &\ \ \ \ +(-\enclose{horizontalstrike}{p_wsin\phi cos\phi\textbf{u}_q}+sin^2\phi||\textbf{u'}||\textbf{u}_q), \\
 &\ \ \ \ p_wcos^2\phi-\enclose{horizontalstrike}{sin\phi cos\phi||\textbf{u'}||} - (-\enclose{horizontalstrike}{sin^2\phi(\textbf{y}\cdot\textbf{u}_q)}-p_wsin^2\phi(\textbf{u}_q\cdot\textbf{u}_q)-\enclose{horizontalstrike}{sin\phi cos\phi(\textbf{p}_v\cdot\textbf{u}_q)}))\\
-&=(-sin^2\textbf{x}+2sin\phi cos\phi \textbf{y} + cos^2\phi \textbf{p}_v + sin^2\phi\textbf{u'},p_w) \\
-&=(-sin^2\textbf{x}+2sin\phi cos\phi \textbf{y} + cos^2\phi (\textbf{p}_v - \textbf{u'}) + \textbf{u'},p_w) \\
+&=(-sin^2\phi\textbf{x}+2sin\phi cos\phi \textbf{y} + cos^2\phi \textbf{p}_v + sin^2\phi\textbf{u'},p_w) \\
+&=(-sin^2\phi\textbf{x}+2sin\phi cos\phi \textbf{y} + cos^2\phi (\textbf{p}_v - \textbf{u'}) + \textbf{u'},p_w) \\
 &=((cos^2\phi-sin^2\phi)\textbf{x}+2sin\phi cos\phi \textbf{y} + \textbf{u'},p_w) \\
 &=(cos(2\phi)\textbf{x}+sin(2\phi)\textbf{y}+\textbf{u'},p_w)
-\end{align*}  $$</center><br>&emsp;&emsp;显然，该式实部未改变$p_w$的值，而虚部刚好使$(p_x, p_y, p_z)^T$按照单位轴$\textbf{u}_q$旋转了$2\phi$，如下图所示：</p>
+\end{align*}  $$</center>
+
+<p>&emsp;&emsp;显然，该式实部未改变$p_w$的值，而虚部刚好使$(p_x, p_y, p_z)^T$按照单位轴$\textbf{u}_q$旋转了$2\phi$，如下图所示：</p>
 <p><img src="/pictures/quaternions/quaternions.png" alt="quaternions"></p>
+<p>&emsp;&emsp;并且容易验证$\hat{\textbf{q}}$和$-\hat{\textbf{q}}$表示的是同种旋转。<br>&emsp;&emsp;所以最终我们可以将空间内绕轴$\textbf{u}_q$旋转$\phi$角度的四元数表示为如下形式：</p>
+<center>$\hat{\textbf{q}}=(sin\frac{\phi}{2}\textbf{u}_q, cos\frac{\phi}{2})$</center>
+
+<p></p>
+<h1 id="3-四元数-gt-旋转矩阵"><a href="#3-四元数-gt-旋转矩阵" class="headerlink" title="3. 四元数-&gt;旋转矩阵"></a>3. 四元数-&gt;旋转矩阵</h1><p>&emsp;&emsp; 接下来我们需要将四元数表示为方便计算的旋转矩阵形式。上一步中我们已经展示了$\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{*} $能够将$\textbf{p}$进行旋转，要得到旋转矩阵，我们尝试将$\textbf{p}_v$从中剥离出来，进行这一步前，先对如下条件进行说明：</p>
+<center>$\hat{\textbf{q}} = \left[\begin{array}{cccc}
+q_x \\ q_y \\ q_z \\ q_w \end{array}\right] = \left[\begin{array}{cccc}
+u_xsin\phi  \\ u_ysin\phi  \\ u_zsin\phi  \\ cos\phi \end{array}\right] \\
+
+
+\textbf{p}=\textbf{Ip} \\
+(\textbf{p}\cdot\textbf{u})\textbf{u} = \textbf{u}(\textbf{u}^T\textbf{p})=\left[\begin{array}{cccc}
+u_x^2 & u_xu_y & u_xu_z \\
+u_xu_y & u_y^2 & u_yu_z \\
+u_xu_z & u_yu_z & u_z^2\end{array}\right]\textbf{p}\\
+\textbf{u}\times\textbf{p}=\left[\begin{array}{cccc}
+u_y p_z - u_z p_y  \\
+u_z p_x - u_x p_z \\
+u_x p_y - u_y p_x \end{array}\right] =  \left[\begin{array}{cccc}
+0 & -u_z & u_y \\
+u_z & 0 & -u_x \\
+-u_y & u_x & 0 \end{array}\right]\textbf{p}$</center>
+
+<p>然后开始进行剥离：</p>
+<center>$$
+\begin{align*}  
+\textbf{Rq}_v&=(cos^2\phi-sin^2\phi)\textbf{x}+2sin\phi cos\phi \textbf{y} + \textbf{u'}\\
+&=(cos^2\phi-sin^2\phi)(\textbf{p}_v - \textbf{u'}) + 2sin\phi cos\phi \textbf{u}_q\times\textbf{p}_v+(cos^2\phi+sin^2\phi)\textbf{u'} \\
+& = (2cos^2\phi - 1)\textbf{p}_v+ 2sin\phi cos\phi \textbf{u}_q\times\textbf{p}_v + 2sin^2\phi (\textbf{p}\cdot\textbf{u}_q)\textbf{u}_q \\
+&= ((2q^2_w-1)\textbf{I}+2q_wsin\phi\left[\begin{array}{cccc}
+0 & -u_z & u_y \\
+u_z & 0 & -u_x \\
+-u_y & u_x & 0 \end{array}\right]+2sin^2\phi\left[\begin{array}{cccc}
+u_x^2 & u_xu_y & u_xu_z \\
+u_xu_y & u_y^2 & u_yu_z \\
+u_xu_z & u_yu_z & u_z^2\end{array}\right])\textbf{p}_v\\
+&=(\left[\begin{array}{cccc}
+2q^2_w-1 & 0 & 0 \\
+0 & 2q^2_w-1 & 0 \\
+0 & 0 & 2q^2_w-1 \end{array}\right]+2q_w\left[\begin{array}{cccc}
+0 & -q_z & q_y \\
+q_z & 0 & -q_x \\
+-q_y & q_x & 0 \end{array}\right]+2\left[\begin{array}{cccc}
+q_x^2 & q_xq_y & q_xq_z \\
+q_xq_y & q_y^2 & q_yq_z \\
+q_xq_z & q_yq_z & q_z^2\end{array}\right])\textbf{p}_v
+\end{align*} 
+$$</center>
+综上，可以有旋转矩阵：
+<center>$$
+\begin{align*}
+\textbf{R} &= \left[\begin{array}{cccc}
+2(q_x^2 + q^2_w)-1& 2(q_xq_y-q_zq_w) & 2(q_xq_z+q_yq_w) \\
+2(q_xq_y +q_zq_w)& 2(q_y^2 + q^2_w)-1 & 2(q_yq_z -q_xq_w)\\
+2(q_xq_z-q_yq_w) & 2(q_yq_z+q_xq_w) & 2(q_z^2 + q^2_w)-1\end{array}\right]\\
+&=\left[\begin{array}{cccc}
+1 - 2(q_y^2 + q^2_z)& 2(q_xq_y-q_zq_w) & 2(q_xq_z+q_yq_w) \\
+2(q_xq_y +q_zq_w)& 1-2(q_x^2 + q^2_z) & 2(q_yq_z -q_xq_w)\\
+2(q_xq_z-q_yq_w) & 2(q_yq_z+q_xq_w) & 1-2(q_x^2 + q^2_y) \end{array}\right]
+\end{align*}$$</center>
+
+<p>&emsp;&emsp; 当然，另一种直接基于矩阵的计算方式或许更直观，将四元数的左乘直接写作如下形式：</p>
+<center>$\begin{align*}
+\hat{\textbf{q}}\hat{\textbf{p}} &= \textbf{q}_v\times\textbf{p}_v+p_w\textbf{q}_v+q_w\textbf{p}_v+q_wp_w-\textbf{p}_v\cdot\textbf{q}_v \\
+&= (\left[\begin{array}{cccc}
+0 & -q_z & q_y & 0\\
+q_z & 0 & -q_x  & 0\\
+-q_y & q_x & 0 & 0 \\
+0 & 0 & 0 & 0\end{array}\right] + \left[\begin{array}{cccc}
+0 & 0 & 0 & q_x\\
+0 & 0 & 0  & q_y\\
+0 & 0 & 0 & q_z \\
+0 & 0 & 0 & 0\end{array}\right] + \left[\begin{array}{cccc}
+q_w & 0 & 0 & 0\\
+0 & q_w & 0  & 0\\
+0 & 0 & q_w & 0 \\
+0 & 0 & 0 & 0\end{array}\right]+ \left[\begin{array}{cccc}
+0 & 0 & 0 & 0\\
+0 & 0 & 0  & 0\\
+0 & 0 & 0 & 0 \\
+-q_x & -q_y & -q_z & q_w\end{array}\right])
+\left[\begin{array}{cccc}
+p_x \\ p_y \\ p_z \\ p_w \end{array}\right] \\
+&= \left[\begin{array}{cccc}
+q_w & -q_z & q_y & q_x\\
+q_z & q_w & -q_x  & q_y\\
+-q_y & q_x & q_w & q_z \\
+-q_x & -q_y & -q_z & q_w\end{array}\right]\left[\begin{array}{cccc}
+p_x \\ p_y \\ p_z \\ p_w \end{array}\right] = \textbf{L}(\textbf{q})\textbf{p}
+\end{align*}$</center>
+
+<p>同样地，右乘也可以表示为：</p>
+<center>$\begin{align*}
+\hat{\textbf{p}}\hat{\textbf{q}} &= \textbf{p}_v\times\textbf{q}_v+p_w\textbf{q}_v+q_w\textbf{p}_v+q_wp_w-\textbf{p}_v\cdot\textbf{q}_v \\
+&= (\left[\begin{array}{cccc}
+0 & q_z & -q_y & 0\\
+-q_z & 0 & q_x  & 0\\
+q_y & -q_x & 0 & 0 \\
+0 & 0 & 0 & 0\end{array}\right] + \left[\begin{array}{cccc}
+0 & 0 & 0 & q_x\\
+0 & 0 & 0  & q_y\\
+0 & 0 & 0 & q_z \\
+0 & 0 & 0 & 0\end{array}\right] + \left[\begin{array}{cccc}
+q_w & 0 & 0 & 0\\
+0 & q_w & 0  & 0\\
+0 & 0 & q_w & 0 \\
+0 & 0 & 0 & 0\end{array}\right]+ \left[\begin{array}{cccc}
+0 & 0 & 0 & 0\\
+0 & 0 & 0  & 0\\
+0 & 0 & 0 & 0 \\
+-q_x & -q_y & -q_z & q_w\end{array}\right])
+\left[\begin{array}{cccc}
+p_x \\ p_y \\ p_z \\ p_w \end{array}\right] \\
+&= \left[\begin{array}{cccc}
+q_w & q_z & -q_y & q_x\\
+-q_z & q_w & q_x  & q_y\\
+q_y & -q_x & q_w & q_z \\
+-q_x & -q_y & -q_z & q_w\end{array}\right]\left[\begin{array}{cccc}
+p_x \\ p_y \\ p_z \\ p_w \end{array}\right] = \textbf{R}(\textbf{q})\textbf{p}
+\end{align*}$</center>
+于是旋转矩阵即可表示为：
+<center>$\begin{align*}
+\textbf{M}&=\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{-1}=\textbf{R}(\textbf{q}^{-1})\textbf{L}(\textbf{q})\textbf{p} \\
+&=\left[\begin{array}{cccc}
+q_w & -q_z & q_y & -q_x\\
+q_z & q_w & -q_x  & -q_y\\
+-q_y & q_x & q_w & -q_z \\
+q_x & q_y & q_z & q_w\end{array}\right]\left[\begin{array}{cccc}
+q_w & -q_z & q_y & q_x\\
+q_z & q_w & -q_x  & q_y\\
+-q_y & q_x & q_w & q_z \\
+-q_x & -q_y & -q_z & q_w\end{array}\right]\left[\begin{array}{cccc}
+p_x \\ p_y \\ p_z \\ p_w \end{array}\right] \\
+&=\left[\begin{array}{cccc}
+\textbf{R} & \textbf{0} \\ \textbf{0} & 1 \end{array}\right]
+\end{align*}$</center>
+
+<h1 id="4-旋转矩阵-gt-四元数"><a href="#4-旋转矩阵-gt-四元数" class="headerlink" title="4. 旋转矩阵-&gt;四元数"></a>4. 旋转矩阵-&gt;四元数</h1><p>&emsp;&emsp;那么当我们拿到如下的旋转矩阵:</p>
+<center>$\textbf{M}=\left[\begin{array}{cccc}
+\textbf{R} & \textbf{0} \\ \textbf{0} & 1 \end{array}\right]$</center>
+要怎么转换为四元数形式呢？我们首先有如下的发现（公式1）：
+<center>$
+m_{21}-m_{12}=4q_xq_w \\
+m_{02}-m_{20}=4q_yq_w \\
+m_{10}-m_{01}=4q_zq_w
+$</center>
+而要得到$q_w$，则需要利用$\textbf{M}$的迹（trace）：
+<center>$tr(\textbf{M})=4-4(q^2_x+q^2_y+q^2_z)=4q^2_w$</center>
+综上即有（公式2）：
+<center>$\begin{array}{cccc}
+q_w = \frac{1}{2}\sqrt{tr(\textbf{M})} & q_x = \frac{m_{21}-m_{12}}{4q_w} \\
+q_y = \frac{m_{02}-m_{20}}{4q_w} & q_z = \frac{m_{10}-m_{01}}{4q_w}
+\end{array}
+$</center>
+&emsp;&emsp;显然上述计算方式有两个问题，首先$q_w > 0$，这个问题我们之前的计算发现对于$q_w=cos\phi$,实际旋转角度为$2\phi$，当我们限制$\phi\in(-\frac{\pi}{2},\frac{\pi}{2}]$时，旋转角度刚好覆盖$2\pi$，并且$q_w$一定大于0。另一个问题是在$q_w$接近时结果不稳定，所以在Real-Time Rendering (4th Edition)中提到了更稳定的算法， 首先令$t=q^2_w - q^2_x-q^2_y-q^2_z$，则有：
+<center>$
+m_{00}=t+2q^2_x \\
+m_{11}=t+2q^2_y \\
+m_{22}=t+2q^2_z \\
+u = m_{00}+m{11}+m{22}=t+2q^2_w
+$</center>
+于是有如下的计算方式：
+1. 根据$m_{00}, m{11}, m{22}, u$判断$q^2_x,q^2_y,q^2_z,q^2_w$的大小
+2. 若q_w最大，则按照公式1进行计算
+3. 反之，选择最大的值，按照如下的方式计算结果，并进而用公式1计算剩余值
+<center>$
+4q^2_x=+ m_{00} - m_{11} - m_{22} + m_{33} \\
+4q^2_y=- m_{00} + m_{11} - m_{22} + m_{33} \\
+4q^2_z=-m_{00} - m_{11} + m_{22} + m_{33} \\
+$</center>
+
+<h1 id="5-球面线性插值"><a href="#5-球面线性插值" class="headerlink" title="5. 球面线性插值"></a>5. 球面线性插值</h1><p>&emsp;&emsp;我们可以对任意两个四元数进行插值，简单地表示如下：</p>
+<p><center>$\textbf{q}(t)=\textbf{q}_0^{1-t}\textbf{q}_1^t$</center><br>即两个旋转的线性组合，但要表示为更容易计算的方式，则是四维单位球上进行球面线性插值其思想是以起点构造基坐标，然后进行施密特正交化，于是即可以如下地得到线性插值结果：</p>
+<p><img src="/pictures/quaternions/interpolation.png" alt="interpolation"></p>
+<p>其中$cos\phi=\textbf{q}_0\cdot\textbf{q}_1$。<br>&emsp;&emsp;可以看到相较于欧拉角，任意两个四元数都可以得到稳定的插值结果。</p>
+<h1 id="6-向量旋转"><a href="#6-向量旋转" class="headerlink" title="6. 向量旋转"></a>6. 向量旋转</h1><p>&emsp;&emsp;很多时候我们希望将向量$\textbf{s}$旋转到向量$\textbf{t}$，并且希望旋转的路径越小越好（即暗示了路径是一条优弧）。那么根据轴向角的方式就很容易描述这个过程了，如下图所示：</p>
+<p><img src="/pictures/quaternions/vector_rotation.png" alt="vector_rotation"></p>
+<p>首先有$\textbf{u}=\frac{\textbf{s}\times\textbf{t}}{||\textbf{s}\times\textbf{t}||}=\frac{\textbf{s}\times\textbf{t}}{sin\theta}$，$e=\textbf{s}\cdot\textbf{t}=cos\theta$，于是可以用四元数表示旋转：</p>
+<p><center>$\hat{\textbf{q}}=(sin\frac{\theta}{2}\textbf{u}, cos\frac{\theta}{2}) = (\frac{sin\frac{\theta}{2}}{sin\theta}\textbf{s}\times\textbf{t}, cos\frac{\theta}{2})=(\frac{1}{\sqrt{2(1+e)}}\textbf{s}\times\textbf{t}, \sqrt{\frac{1+e}{2}})$</center><br>需要注意的是仅当$\textbf{s}$和$\textbf{t}$相反时，上述计算会出现问题。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>Real-Time Rendering (4th Edition)</p>
 
       
     </div>
@@ -790,7 +974,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数学定义"><span class="nav-text">1. 数学定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-旋转"><span class="nav-text">2. 旋转</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数学定义"><span class="nav-text">1. 数学定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-旋转"><span class="nav-text">2. 旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-四元数-gt-旋转矩阵"><span class="nav-text">3. 四元数-&gt;旋转矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-旋转矩阵-gt-四元数"><span class="nav-text">4. 旋转矩阵-&gt;四元数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-球面线性插值"><span class="nav-text">5. 球面线性插值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-向量旋转"><span class="nav-text">6. 向量旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
